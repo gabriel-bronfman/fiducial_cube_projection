@@ -1,6 +1,6 @@
 # AR projection of Cube onto Fiducial marking
 ## Overview
-This repository contains information on how to project a cube onto an AprilTag, or any sort of a fiducial. It has code, but also an explanation on the key components of the problem. The problem is easily solvable using integrated OpenCv functionality, but also has a self-implemented approach so that it is more transparent what is happening.
+This repository contains information on how to project a cube onto an AprilTag, or any sort of a fiducial. It has code, but also an explanation on the key components of the problem. The problem is easily solvable using integrated OpenCv functionality, but also has a self-implemented approach so that it is more transparent what to is happening.
 
 This problem essentially boils down to three primary steps: estimating the homography of the AprilTag, extracting the orientation and position of the camera with relation to a frame attached to the AprilTag, then using that information to project points into the image plane as if you were imaging a box at the AprilTag frame.
 
