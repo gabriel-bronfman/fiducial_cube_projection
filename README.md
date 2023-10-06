@@ -63,3 +63,14 @@ From my resulting R and T, I can convert my R into a angle-axis representation u
 The primary disadvantage to the self-implementation approach has is that I do not do a least-squared optimization on the resulting R from step 2 to find a true orthonormal rotation matrix. This means in general my results are slightly less than ideal, however still quite good.
 
 The pictures are from both implementations:
+
+## Optimized Way:
+![alt text](https://github.com/gabriel-bronfman/project_cube/blob/main/images/easy_way_1.png "Easy Way 1")
+![alt text](https://github.com/gabriel-bronfman/project_cube/blob/main/images/Easy_way_2.png "Easy Way 2")
+![alt text](https://github.com/gabriel-bronfman/project_cube/blob/main/images/easy_way_3.png "Easy Way 3")
+
+## Unoptimized Way:
+
+![alt text](https://github.com/gabriel-bronfman/project_cube/blob/main/images/hard_way_1.png "Easy Way 1")
+![alt text](https://github.com/gabriel-bronfman/project_cube/blob/main/images/hard_way_2.png "Easy Way 2")
+![alt text](https://github.com/gabriel-bronfman/project_cube/blob/main/images/hard_way_3.png "Easy Way 3")
