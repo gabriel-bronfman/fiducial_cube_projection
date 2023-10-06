@@ -26,7 +26,7 @@ You can use projectPoints, which does this math for you, to compute the imaged l
 
 The hard way is to essentially code all the steps yourself. The first two steps use my own implementation, and while I still use projectPoints, its really just a few easy matrix equations away from your own implementation.
 
-You can find my implementation of the DLT algorithm that, with the corners in the global frame and image plane, constructs a $Ax=0$ equation. I highly reccomend reading the Hartley-Zisserman Multiview Geometry book if you need proof why this makes sense. You can find it [here](http://www.r-5.org/files/books/computers/algo-list/image-processing/vision/Richard_Hartley_Andrew_Zisserman-Multiple_View_Geometry_in_Computer_Vision-EN.pdf) Using singular value decomposition, I can then exract the estimated homography from these points. In general, mo' points means mo' better, but since a homograhpy has 8 DOF, you need a minumum four points (i.e the four corners of the tag). To finish, I divide the entire matrix by a scalar of H[3,3] to ensure that the last element in the H matrix is 1.
+You can find my implementation of the DLT algorithm that, with the corners in the global frame and image plane, constructs a $Ax=0$ equation. I highly reccomend reading the Hartley-Zisserman Multiview Geometry book if you need proof why this makes sense. You can find it [here](http://www.r-5.org/files/books/computers/algo-list/image-processing/vision/Richard_Hartley_Andrew_Zisserman-Multiple_View_Geometry_in_Computer_Vision-EN.pdf). Using singular value decomposition, I can then exract the estimated homography from these points. In general, mo' points means mo' better, but since a homograhpy has 8 DOF, you need a minumum four points (i.e the four corners of the tag). To finish, I divide the entire matrix by a scalar of H[3,3] to ensure that the last element in the H matrix is 1.
 
 For this next part, we want to remember the camera projection equation:
 ```math
@@ -38,20 +38,20 @@ To extract the rotation and translation from the homography, one uses a simple d
 p = K \begin{bmatrix} R|t \end{bmatrix}
 ```
 
-We know that P is equal to H, as the definition of a homography is a 2D-2D planar transformation of points that preserves only collinearity. Thus 
+We know that P is equal to H, as the definition of a homography is a 2D-2D planar transformation of points that preserves only collinearity. The projection equation follows this exact definition, as it projects the 2D points on the imaged tag to the image plane. Thus 
 
 ```math
 H = K \begin{bmatrix} R|t \end{bmatrix}
 ```
 
 
-By premultiplying the homography by $K^{-1}$, I can extract the columns $r_1 $ and $r_2$. This is confusing, but clear from the following equations:
+By premultiplying the homography by $K^{-1}$, I can extract the columns $r_1$ and $r_2$. This is confusing, but clear from the following equations:
 
 ```math
 K^{-1}H = \begin{bmatrix} R|t \end{bmatrix} 
 ```
 ```math
-\begin{bmatrix} u\\v\end{bmatrix} K^{-1}H   = \begin{bmatrix} r_1 & r_2 & r_3 & t \end{bmatrix} \begin{bmatrix} X\\Y\\0 \end{bmatrix}
+K^{-1}H \begin{bmatrix} u\\v\end{bmatrix}  = \begin{bmatrix} r_1 & r_2 & r_3 & t \end{bmatrix} \begin{bmatrix} X\\Y\\0 \end{bmatrix}
 ```
 ```math
 \begin{bmatrix} K^{-1}H \end{bmatrix}  = \begin{bmatrix} r_1 & r_2 & t \end{bmatrix} 
