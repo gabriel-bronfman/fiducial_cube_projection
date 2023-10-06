@@ -56,7 +56,7 @@ K^{-1}H \begin{bmatrix} u\\v\end{bmatrix}  = \begin{bmatrix} r_1 & r_2 & r_3 & t
 ```math
 \begin{bmatrix} K^{-1}H \end{bmatrix}  = \begin{bmatrix} r_1 & r_2 & t \end{bmatrix} 
 ```
-Because the we define the world frame on the fiducial, the Z coordinate for our global frame points will always be zero. This allows us to eliminate the $r_3$ vector and make the claim that  $r_1 $, $r_2$, and $t$ are simply the column vectors of H. We then normalize the column vectors of the H matrix by the average of the magnitudes $||r_1||$ and  $||r_2||$ to create vectors as close to unity as possible. 
+Because the we define the world frame on the fiducial, the Z coordinate for our global frame points will always be zero. This allows us to eliminate the $r_3$ vector and make the claim that  $r_1 $, $r_2$, and $t$ are simply the column vectors of $K^{-1}H$. We then normalize the column vectors of the H matrix by the average of the magnitudes $||r_1||$ and  $||r_2||$ to create vectors as close to unity as possible. 
 
 We can simply recover the lost $r_3$ by crossing our normalized $r_1$ and $r_2$. In my implementation, I found that normalizing the three column vectors by the average of $r_1$ and $r_2$ of the resulting matrix from $K^{-1}H$ resulted in a better rotation matrix.
 
