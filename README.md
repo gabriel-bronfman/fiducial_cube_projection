@@ -60,13 +60,17 @@ Because the we define the world frame on the fiducial, the Z coordinate for our 
 
 We can simply recover the lost $r_3$ by crossing our normalized $r_1$ and $r_2$. In my implementation, I found that normalizing the three column vectors by the average of $r_1$ and $r_2$ of the resulting matrix from $K^{-1}H$ resulted in a better rotation matrix.
 
+I have also implemented a basic least-squared optimizer option using singular value decomposition. This optmization is not as good as the solvePnP version, and reduces some stability of estimated rotataion matrix, but does create better solutions in general. You can activate it as you see fit.
+
 From my resulting R and T, I can convert my R into a angle-axis representation using cv2.Rodrigues and then pass all of that into my projectPoints, as before. I can then draw lines between my projected points.
 
 ## Comparison of approaches
 
-The primary disadvantage to the self-implementation approach has is that I do not do a least-squared optimization on the resulting R from step 2 to find a true orthonormal rotation matrix. This means in general my results are slightly less than ideal, however still quite good.
+The primary disadvantage to the self-implementation approach has is that I do not do a great job with (if any) least-squared optimization on the resulting R from step 2 to find a true orthonormal rotation matrix. This means in general my results are slightly less than ideal, however still quite good.
 
-The pictures are from both implementations:
+
+
+The pictures are from all implementations:
 
 ## Optimized Way:
 ![alt text](https://github.com/gabriel-bronfman/project_cube/blob/main/images/easy_way_1.png "Easy Way 1")
@@ -78,3 +82,7 @@ The pictures are from both implementations:
 ![alt text](https://github.com/gabriel-bronfman/project_cube/blob/main/images/hard_way_1.png "Easy Way 1")
 ![alt text](https://github.com/gabriel-bronfman/project_cube/blob/main/images/hard_way_2.png "Easy Way 2")
 ![alt text](https://github.com/gabriel-bronfman/project_cube/blob/main/images/hard_way_3.png "Easy Way 3")
+
+## Self-optimized way
+
+
