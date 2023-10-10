@@ -15,7 +15,7 @@ def homography(input_pts, output_pts):
                                    [0, 0, 0, -x, -y, -1, x*yp, y*yp, yp]])])
     
     
-    U, Sigma, V = np.linalg.svd(A)
+    U, _ , V = np.linalg.svd(A)
     
     h = np.reshape(V[-1, :], (3, 3))
     
@@ -32,7 +32,7 @@ def solveExtrinsicsFromH(h,k):
         b =  b*(-1)
     [a1,a2,a3] = b.T
     
-    #Instead of normalizing by the value of A1, or A2, we average the two and normalize by both to create the better rotation 
+    #Instead of normalizing by the value of A1, or A2, we average the two and normalize by both to create the better rotation
     # matrix
     Lambda = 2/(np.linalg.norm(a1) + np.linalg.norm(a2))
     r1 = Lambda * a1
@@ -42,6 +42,28 @@ def solveExtrinsicsFromH(h,k):
     h =  np.column_stack((r1, r2, r3))
      
     return h,t
+    
+def solveExtrinsicsFromHwithSVD(h,k):
+    b = (np.linalg.inv(k)@h)
+    
+    if np.linalg.det(b)<0:
+        b =  b*(-1)
+    [a1,a2,a3] = b.T
+    
+    # Extract components of rotation matrix and translation from homography
+
+    r1 = a1
+    r2 = a2
+    r3 = np.cross(r1, r2, axis = 0)
+    t = (1/np.linalg.norm(a1)) * a3
+    h =  np.column_stack((r1, r2, r3))
+    
+    # Solve least-squared optimization to find closest true rotation matrix to estimated solution
+    u, s , v = np.linalg.svd(h)
+    
+    R = u@np.array([[1,0,0],[0,1,0],[0,0,np.linalg.det(u@v.T)]])@v.T
+    
+    return R,t
 
 def drawCube(frame,tag_corners, cube_corners):
     (CubePtA,CubePtB,CubePtC,CubePtD) = cube_corners

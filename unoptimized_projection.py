@@ -1,7 +1,7 @@
 import cv2
 import apriltag
 import numpy as np
-from projection_funcs import homography, solveExtrinsicsFromH, drawCube
+from projection_funcs import homography, solveExtrinsicsFromH, solveExtrinsicsFromHwithSVD, drawCube
 
 cam = cv2.VideoCapture(1)
 
@@ -45,7 +45,10 @@ while True:
         
         #Solve homography for seen tag, then extract camera extrinsic parameters from seen homography
         h = homography(corner_tag_global_frame,corner_tag_pixel)
-        rotation,tvec = solveExtrinsicsFromH(h,k)
+        #rotation,tvec = solveExtrinsicsFromH(h,k)
+        
+        # Can enable this line to activate least-squared optimization approach. Will reduce stable accuracry of R but improve quality when estimated correctly
+        #rotation,tvec = solveExtrinsicsFromHwithSVD(h,k)
         
         #Convert rotation matrix to Angle-Axis representation via Rodrigues formula
         rvec,_ = cv2.Rodrigues(rotation)
