@@ -12,7 +12,7 @@ Just clone the repo and use python to run either the optimized or unoptimized py
 
 ## Easy way
 
-Using cv2.solvePnP, you can solve for the camera extrinsics by passing in the perceived AprilTags corners, the generally defined location of the AprilTag corners in the AprilTag frame (namely $[[0,0,0],[0,1,0],[1,1,0],[1,0,0]]$), and the intrinsics of the camera. This function is very helpful for a couple reasons. The PnP problem is actually degenerate when you have four coplanar points (like in our case). However, the function automatically reverts to estiamting the pose of the camera using homography estimation. It will return a angle-axis rotational parameterization of the orientation of the camera, along with a translation vector. These are exactly what we need to pass into our next function.
+Using cv2.solvePnP, you can solve for the camera extrinsics by passing in the perceived AprilTags corners, the generally defined location of the AprilTag corners in the AprilTag frame (namely $[[0,0,0],[0,1,0],[1,1,0],[1,0,0]]$), and the intrinsics of the camera. This function is very helpful for a couple reasons. The PnP problem is actually degenerate when you have four coplanar points (like in our case). However, the function automatically reverts to estimating the pose of the camera using homography estimation. It will return a angle-axis rotational parameterization of the orientation of the camera, along with a translation vector. These are exactly what we need to pass into our next function.
 
 For this next section, its important to know the following equation:
 ```math
