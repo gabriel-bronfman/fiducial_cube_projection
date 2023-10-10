@@ -85,4 +85,6 @@ The pictures are from all implementations:
 
 ## Self-optimized way
 
-
+![alt text](https://github.com/gabriel-bronfman/project_cube/blob/main/images/optimized_way_1.png "Easy Way 1")
+![alt text](https://github.com/gabriel-bronfman/project_cube/blob/main/images/optimized_way_2.png "Easy Way 2")
+![alt text](https://github.com/gabriel-bronfman/project_cube/blob/main/images/optimized_way_3.png "Easy Way 3")
